@@ -112,7 +112,6 @@ contract('SFC', async ([firstValidator, secondValidator, thirdValidator, firstDe
 
     describe('Methods tests', async () => {
         it('checking createValidator function', async () => {
-            const pubkey = '0x00a2941866e485442aa6b17d67d77f8a6c4580bb556894cc1618473eff1e18203d8cce50b563cf4c75e408886079b8f067069442ed52e2ac9e556baa3f8fcc525f';
             expect(await this.sfc.lastValidatorID.call()).to.be.bignumber.equal(new BN('0'));
             await expectRevert(this.sfc.createValidator(pubkey, {
                 from: firstValidator,
