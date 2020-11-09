@@ -104,7 +104,6 @@ contract('SFC', async ([firstValidator, secondValidator, thirdValidator, firstDe
     beforeEach(async () => {
         this.firstEpoch = 0;
         this.sfc = await UnitTestSFC.new();
-        await this.sfc.initialize(0);
         await this.sfc.rebaseTime();
         this.node = new BlockchainNode(this.sfc, firstValidator);
         this.validatorComission = new BN('150000'); // 0.15
