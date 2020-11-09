@@ -6,7 +6,7 @@ class TransactionStorage {
     }
 
     saveTxHash(hash, name) {
-        const tx = {hash:hash, name:name};
+        const tx = { hash, name };
         this.transactionHashes.push(tx);
     }
 }

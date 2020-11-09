@@ -23,7 +23,7 @@ const wei3 = new BN('3');
 
 function toValidatorIDs(validators) {
     const arr = [];
-    for (let vid in validators) {
+    for (const vid in validators) {
         arr.push(vid);
     }
     return arr;
@@ -52,7 +52,7 @@ class BlockchainNode {
                 }
                 await this.sfc.sendTransaction({
                     from: this.minter,
-                    value: tx.logs[i].args.value
+                    value: tx.logs[i].args.value,
                 });
             }
         }
@@ -91,7 +91,7 @@ class BlockchainNode {
         this.validators = this.nextValidators;
         // clone this.nextValidators
         this.nextValidators = {};
-        for (let vid in this.validators) {
+        for (const vid in this.validators) {
             this.nextValidators[vid] = this.validators[vid];
         }
     }
@@ -226,7 +226,7 @@ contract('SFC', async ([firstValidator, secondValidator, thirdValidator, firstDe
             expect(await this.sfc.currentSealedEpoch.call()).to.be.bignumber.equal(new BN('1'));
             expect(await this.sfc.currentEpoch.call()).to.be.bignumber.equal(new BN('2'));
 
-            let firstValidatorID = await this.sfc.getValidatorID(firstValidator);
+            const firstValidatorID = await this.sfc.getValidatorID(firstValidator);
             await this.node.handle(await this.sfc.stake(firstValidatorID, {
                 from: firstDelegator,
                 value: amount18('5.0'),
@@ -258,13 +258,13 @@ contract('SFC', async ([firstValidator, secondValidator, thirdValidator, firstDe
                 from: secondValidator,
                 value: amount18('3.175'),
             }));
-            let secondValidatorID = await this.sfc.getValidatorID(secondValidator);
+            const secondValidatorID = await this.sfc.getValidatorID(secondValidator);
 
             await this.node.handle(await this.sfc.createValidator(pubkey, {
                 from: thirdValidator,
                 value: amount18('10.0'),
             }));
-            let thirdValidatorID = await this.sfc.getValidatorID(thirdValidator);
+            const thirdValidatorID = await this.sfc.getValidatorID(thirdValidator);
 
             await this.node.handle(await this.sfc.stake(secondValidatorID, {
                 from: firstDelegator,
@@ -329,7 +329,6 @@ contract('SFC', async ([firstValidator, secondValidator, thirdValidator, firstDe
             // console.log((await this.sfc.pendingRewards.call(thirdValidator, thirdValidatorID)).toString());
             // console.log((await this.sfc.pendingRewards.call(firstDelegator, secondValidatorID)).toString());
             // console.log((await this.sfc.pendingRewards.call(secondDelegator, secondValidatorID)).toString());
-
         });
     });
 });
